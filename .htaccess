@@ -1,0 +1,5 @@
+RewriteEngine On
+
+# Redirecionar /portaldenoticias para /portaldenoticias/public
+RewriteCond %{REQUEST_URI} ^/portaldenoticias/?$ [NC]
+RewriteRule ^$ /portaldenoticias/public [L,R=301]
