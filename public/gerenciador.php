@@ -1,44 +1,10 @@
 <?php
+session_start();
 
-
-if (isset($_COOKIE['usuario_logado'])) {
-
-	$usuario = htmlspecialchars($_COOKIE['usuario_logado']);
-	// include "funcoesAgenda.php";
-
-} else {
-	header('Location: login.php?cookie=n');
-	exit;
+if (isset($_SESSION)) {
+	
 }
-$exclusaoInvalida = false;
 
-
-if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['senha-validacao'])) {
-
-	include "funcoes.php";
-	$id_excluir = $_POST['id_excluir'];
-	// $usuarios = carregarUsuarios();
-
-	foreach ($usuarios as $indice => $user) {
-		if ($indice == $_COOKIE['id_usuario_logado']) {
-
-
-			$senhaUsuario = $user['senha'];
-
-			if ($senhaUsuario === $_POST['senha-validacao']) {
-				echo "oi";
-				header("Location: agendaExcluir.php?excluir=$id_excluir");
-
-
-			} else {
-				$exclusaoInvalida = true;
-
-			}
-
-			break;
-		}
-	}
-}
 
 ?>
 
@@ -48,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['senha-validacao'])) {
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>SISTEMA</title>
+	<title>PORTAL DE NOTICIAS</title>
 </head>
 
 <body>
