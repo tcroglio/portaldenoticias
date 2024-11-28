@@ -8,14 +8,14 @@ class Noticia
     private $table_name = "tbl_noticias";
 
     public function __construct($db)
-    {   
+    {
         $this->conn = $db;
     }
 
     // Insere uma nova notícia no banco
     public function insertNot($titulo, $autor, $data_hora, $noticia, $caminho_foto)
     {
-        $query = "INSERT INTO " . $this->table_name . " (titulo, autor, data_hora, noticia, caminho_foto) VALUES (?, ?, ?, ?, ?)";
+        $query = "INSERT INTO " . $this->table_name . " (titulo, id_autor, data_hora, corpo_noticia, caminho_foto) VALUES (?, ?, ?, ?, ?)";
 
         // Preparando o comando...
         $stmt = $this->conn->prepare($query);
@@ -29,7 +29,9 @@ class Noticia
     // Seleciona todas as notícias
     public function selectNot()
     {
-        $query = "SELECT * FROM " . $this->table_name;
+        $query = "SELECT n.*, n.id AS id_noticia, u.* FROM $this->table_name AS n 
+                    JOIN tbl_usuarios AS u
+                    ON u.id = n.id_autor";
 
         // Preparando o comando...
         $stmt = $this->conn->prepare($query);
@@ -43,7 +45,10 @@ class Noticia
     // Seleciona apenas uma notícia específica
     public function selectIDNot($id)
     {
-        $query = "SELECT * FROM " . $this->table_name . " WHERE id = ?";
+        $query = "SELECT * FROM $this->table_name AS n 
+                    JOIN tbl_usuarios AS u
+                    ON u.id = n.id_autor
+                    WHERE n.id = ?";
 
         // Preparando o comando...
         $stmt = $this->conn->prepare($query);
@@ -54,6 +59,22 @@ class Noticia
         // O "fetch" com o "FETCH_ASSOC" é utilizado para mostrar apenas um resultado, como buscou diretamente pelo ID
         // é como o mysqli_fetch_assoc();   
         return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function selectNoticiaPorAutor($id_autor)
+    {
+        $query = "SELECT n.*, n.id AS id_noticia, u.* FROM $this->table_name AS n 
+                    JOIN tbl_usuarios AS u
+                        ON u.id = n.id_autor
+                    WHERE id_autor = ?";
+
+        // Preparando o comando...
+        $stmt = $this->conn->prepare($query);
+
+        // Setando os parâmetros...
+        $stmt->execute([$id_autor]);
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     // Faz um update na notícia do $id enviado

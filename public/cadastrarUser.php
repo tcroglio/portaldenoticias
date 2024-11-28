@@ -36,7 +36,7 @@ if (isset($_GET['excluir'])) {
 	<div class="container mt-5">
 		<h2 class="text-center mb-4">Cadastre um novo usuário</h2>
 
-		<form method="POST" action="/portaldenoticias/src/php/procUser.php?acao=i" class="border m-5 p-4 rounded bg-light">
+		<form method="POST" action="/portaldenoticias/src/php/procUser.php?acao=i" id="form" class="border m-5 p-4 rounded bg-light">
 			<div class="form-group mb-1">
 				<label for="usuario" class="form-label">Nome completo</label>
 				<input type="text" class="form-control" name="usuario" id="usuario" placeholder="Nome completo">
@@ -49,12 +49,12 @@ if (isset($_GET['excluir'])) {
 			<div class="form-group d-flex gap-2 w-100 mb-1">
 				<div class="w-50">
 					<label for="senha" class="form-label">Senha</label>
-					<input type="text" class="form-control" name="senha" id="senha" placeholder="Senha">
+					<input type="password" class="form-control" name="senha" id="senha" placeholder="Senha">
 				</div>
 
 				<div class="w-50">
 					<label for="senhaconfirm" class="form-label">Confirme sua senha</label>
-					<input type="text" class="form-control" id="senhaconfirm" placeholder="Confirme sua senha">
+					<input type="password" class="form-control" id="senhaconfirm" placeholder="Confirme sua senha">
 				</div>
 			</div>
 
@@ -79,6 +79,22 @@ if (isset($_GET['excluir'])) {
 		</form>
 	</div>
 
+	<script>
+		document.addEventListener("DOMContentLoaded", () => {
+			const form = document.getElementById("form");
+			const senha = document.getElementById("senha");
+			const senhaConfirm = document.getElementById("senhaconfirm");
+
+			form.addEventListener("submit", function (event) {
+				// Verificar se as senhas coincidem
+				if (senha.value !== senhaConfirm.value) {
+					event.preventDefault(); // Impede o envio do formulário
+					alert("As senhas não coincidem. Por favor, verifique e tente novamente.");
+				}
+			});
+		});
+
+	</script>
 </body>
 
 </html>

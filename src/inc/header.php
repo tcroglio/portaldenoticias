@@ -15,9 +15,9 @@
 
 <header>
 	<nav class="navbar navbar-dark bg-dark justify-content-between p-3">
-		<a class="navbar-brand px-4 fw-bold text-success" href="./">PORTAL DE NOTÍCIAS</a>
+		<a class="navbar-brand px-4 fw-bold text-success" href="./gerenciador.php">PORTAL DE NOTÍCIAS</a>
 		<div class="d-flex gap-2">
-			<button class="btn btn-sm btn-success my-2 my-sm-0 px-4" onclick="window.location.href='/portaldenoticias/public/login.php'">LOGIN</button>
+			<button class="btn btn-outline-success my-2 my-sm-0" onclick="window.location.href='/portaldenoticias/public/cadastrarNoticia.php'">Nova notícia</button>
 			<form method="POST" action="/portaldenoticias/src/php/logout.php">
 				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">SAIR</button>
 			</form>

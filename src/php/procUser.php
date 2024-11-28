@@ -30,14 +30,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['acao'])) {
 
 		if ($user->insertUser($usuario, $email, $senhaHash, $fone, $genero)) {
 
-			echo "Deu tudo certo!";
+			echo "Usuário cadastrado com sucesso!";
 
 		} else {
-			echo "Deu tudo errado!";
+			echo "Ops! Parece que ocorreu um erro ao inserir o usuário!";
 
 		}
 
-		// header('Location: /portaldenoticias/public/login.php');
+		header('Location: /portaldenoticias/public/login.php');
 
 	} else if ($acao == 'l') {
 		echo "Ação: LOGIN <br>";
@@ -45,17 +45,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['acao'])) {
 		$email = $_POST['login'];
 		$senha = $_POST['senha'];
 
-		echo "\$email = $email<br> \$senha = $senha<br><br>";
 
 		if ($usuarioLogado = $user->login($email, $senha)) {
 
 			$_SESSION['user_id'] = $usuarioLogado['id'];
 			header('Location: /portaldenoticias/public/gerenciador.php');
-
+			
 		} else {
 
-			echo "deu ruim xiru";
-			// header('Location: /portaldenoticias/public/login.php');
+			echo "Ops! Parece que ocorreu um erro ao validar o usuário.";
+			header('Location: /portaldenoticias/public/login.php');
 		}
 	}
 }
