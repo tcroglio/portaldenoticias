@@ -65,11 +65,11 @@ if (isset($_SESSION['user_id'])) {
 							: $dadosNoticia['corpo_noticia'];
 						?>
 						<tr>
-							<th scope="col"><?= $dadosNoticia['id'] ?></th>
+							<th scope="col"><?= $dadosNoticia['id_noticia'] ?></th>
 
-							<th scope="col"><?= $dadosNoticia['titulo'] ?> </th>
+							<th scope="col">"<?= $dadosNoticia['titulo'] ?>"</th>
 
-							<th scope="col"><?= $corpoLimitado ?></th>
+							<th scope="col">"<?= $corpoLimitado ?>"</th>
 
 							<th scope="col">"<?= $dadosNoticia['nome'] ?>"</th>
 
@@ -80,7 +80,9 @@ if (isset($_SESSION['user_id'])) {
 							<th scope="col">
 								<div class="d-flex gap-2">
 									<button class="btn btn-warning" onclick="window.location.href='editarNoticia.php?id_noticia=<?= $dadosNoticia['id_noticia'] ?>'">Editar</button>
-									<button class="btn btn-danger" onclick="window.location.href='procNoticia.php?acao=d&id_noticia=<?= $dadosNoticia['id_noticia'] ?>'">Apagar</button>
+									<form method="POST" action="/portaldenoticias/src/php/procNoticia.php?acao=d&id_noticia=<?= $dadosNoticia['id_noticia'] ?>">
+										<button type="submit" class="btn btn-danger">Apagar</button>
+									</form>
 								</div>
 							</th>
 						</tr>

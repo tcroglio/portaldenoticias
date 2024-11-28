@@ -35,7 +35,7 @@ if (isset($_SESSION['user_id'])) {
 	<div class="container mt-5">
 		<h2 class="text-center mb-4">Editar notícia</h2>
 
-		<form method="POST" action="/portaldenoticias/src/php/procNoticia.php?acao=u" id="form-noticia" class="border m-5 p-4 rounded bg-light" enctype="multipart/form-data">
+		<form method="POST" action="/portaldenoticias/src/php/procNoticia.php?acao=u&id_noticia=<?= $_GET['id_noticia'] ?>" id="form-noticia" class="border m-5 p-4 rounded bg-light" enctype="multipart/form-data">
 			<div class="form-group mb-3">
 				<label for="titulo" class="form-label">Título da Notícia</label>
 				<input type="text" class="form-control" name="titulo" id="titulo" value="<?= $dadosNoticia['titulo'] ?>" placeholder="Digite o título da notícia" required>
@@ -69,7 +69,7 @@ if (isset($_SESSION['user_id'])) {
 				<img width="200px" src="<?= $dadosNoticia['caminho_foto'] ?>" alt="Imagem da notícia">
 			</div>
 
-			<button type="submit" class="btn btn-success w-100">Cadastrar Notícia</button>
+			<button type="submit" class="btn btn-success w-100">Editar Notícia</button>
 			<a href="gerenciador.php" class="btn btn-secondary mt-3 w-100">Voltar</a>
 		</form>
 	</div>

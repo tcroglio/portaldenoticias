@@ -80,13 +80,28 @@ class Noticia
     // Faz um update na notícia do $id enviado
     public function updateNot($id, $titulo, $autor, $data, $noticia, $foto)
     {
-        $query = "UPDATE " . $this->table_name . " SET titulo = ?, autor = ?, data = ?, noticia = ?,foto = ? WHERE id = ?";
 
-        // Preparando o comando...
-        $stmt = $this->conn->prepare($query);
+        if ($foto == '') { // QUERY SEM ATUALIZAR A FOTO
 
-        // Setando os parâmetros...
-        $stmt->execute([$titulo, $autor, $data, $noticia, $foto, $id]);
+            $query = "UPDATE " . $this->table_name . " SET titulo = ?, id_autor = ?, data_hora = ?, corpo_noticia = ? WHERE id = ?";
+
+            // Preparando o comando...
+            $stmt = $this->conn->prepare($query);
+
+            // Setando os parâmetros...
+            $stmt->execute([$titulo, $autor, $data, $noticia, $id]);
+
+        } else { // QUERY ATUALIZANDO A FOTO
+
+            $query = "UPDATE " . $this->table_name . " SET titulo = ?, id_autor = ?, data_hora = ?, corpo_noticia = ?, caminho_foto = ? WHERE id = ?";
+
+            // Preparando o comando...
+            $stmt = $this->conn->prepare($query);
+
+            // Setando os parâmetros...
+            $stmt->execute([$titulo, $autor, $data, $noticia, $foto, $id]);
+        }
+
 
         return $stmt;
     }
