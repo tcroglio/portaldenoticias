@@ -69,7 +69,7 @@ if (isset($_SESSION['user_id'])) {
 				<img width="200px" src="<?= $dadosNoticia['caminho_foto'] ?>" alt="Imagem da notícia">
 			</div>
 
-			<button type="submit" class="btn btn-success w-100">Editar Notícia</button>
+			<button type="submit" class="btn btn-success w-100">Salvar edições</button>
 			<a href="gerenciador.php" class="btn btn-secondary mt-3 w-100">Voltar</a>
 		</form>
 	</div>

@@ -17,6 +17,8 @@
 	<nav class="navbar navbar-dark bg-dark justify-content-between p-3">
 		<a class="navbar-brand px-4 fw-bold text-success" href="./gerenciador.php">PORTAL DE NOTÍCIAS</a>
 		<div class="d-flex gap-2">
+			<button class="btn btn-outline-success my-2 my-sm-0" onclick="window.location.href='/portaldenoticias/public/verAutores.php'">Ver autores</button>
+			<button class="btn btn-outline-success my-2 my-sm-0" onclick="window.location.href='/portaldenoticias/public'">Visualizar todas as notícias</button>
 			<button class="btn btn-outline-success my-2 my-sm-0" onclick="window.location.href='/portaldenoticias/public/cadastrarNoticia.php'">Nova notícia</button>
 			<form method="POST" action="/portaldenoticias/src/php/logout.php">
 				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">SAIR</button>

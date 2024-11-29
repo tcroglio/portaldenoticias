@@ -10,9 +10,6 @@ if (isset($_SESSION['user_id'])) {
 	$db = new Database();
 	$user = new User($db->getConnection());
 	$noticia = new Noticia($db->getConnection());
-	
-	$usuarioLogado = $user->selectIDUser($_SESSION['user_id']);
-	$bemvindoa = ($usuarioLogado['genero'] == 'M') ? "Bem vindo" : "Bem vinda";
 
 } else {
 	header('Location: /portaldenoticias/public/');
@@ -34,53 +31,46 @@ if (isset($_SESSION['user_id'])) {
 	<?php include "../src/inc/header.php"; ?>
 
 	<main class="container p-5">
-		<h1><?= $bemvindoa . ", " . $usuarioLogado['nome']; ?>!</h1>
-		<p>Seu usuário está logado e autenticado.</p>
+		<h1>Autores cadastrados</h1>
 
 
 		<br><br><br><br>
 
 
-		<h4>Mostrando apenas as suas notícias abaixo:</h4>
 		<table class="table">
 			<thead class="thead-dark">
 				<tr>
 					<th scope="col">Código</th>
-					<th scope="col">Título</th>
-					<th scope="col">Prévia</th>
-					<th scope="col">Autor</th>
-					<th scope="col">Imagem</th>
+					<th scope="col">Nome</th>
+					<th scope="col">Email</th>
+					<th scope="col">Fone</th>
+					<th scope="col">Gênero</th>
 					<th scope="col">Ações</th>
 				</tr>
 			</thead>
 
 			<tbody>
 				<?php
-				$arrayNoticias = $noticia->selectNoticiaPorAutor($_SESSION['user_id']);
+				$arrayUsers = $user->selectUser();
 
-				if (count($arrayNoticias) > 0) {
-					foreach ($arrayNoticias as $dadosNoticia) {
-						$corpoLimitado = strlen($dadosNoticia['corpo_noticia']) > 35
-							? substr($dadosNoticia['corpo_noticia'], 0, 35) . "..."
-							: $dadosNoticia['corpo_noticia'];
+				if ($arrayUsers) {
+					foreach ($arrayUsers as $dadosUser) {
 						?>
 						<tr>
-							<th scope="col"><?= $dadosNoticia['id_noticia'] ?></th>
+							<th scope="col"><?= $dadosUser['id'] ?></th>
 
-							<th scope="col"><?= $dadosNoticia['titulo'] ?></th>
+							<th scope="col"><?= $dadosUser['nome'] ?></th>
 
-							<th scope="col"><?= $corpoLimitado ?></th>
+							<th scope="col"><?= $dadosUser['email'] ?></th>
 
-							<th scope="col"><?= $dadosNoticia['nome'] ?></th>
+							<th scope="col"><?= $dadosUser['fone'] ?></th>
 
-							<th scope="col">
-								<img height="100px" width="100px" src="<?= $dadosNoticia['caminho_foto'] ?>" alt="Imagem da noticia">
-							</th>
+							<th scope="col"><?= ($dadosUser['genero'] == 'M') ? 'Masculino' : 'Feminino' ?></th>
 
 							<th scope="col">
 								<div class="d-flex gap-2">
-									<button class="btn btn-warning" onclick="window.location.href='editarNoticia.php?id_noticia=<?= $dadosNoticia['id_noticia'] ?>'">Editar</button>
-									<form method="POST" action="/portaldenoticias/src/php/procNoticia.php?acao=d&id_noticia=<?= $dadosNoticia['id_noticia'] ?>">
+									<button class="btn btn-warning" onclick="window.location.href='editarAutor.php?id_autor=<?= $dadosUser['id'] ?>'">Editar</button>
+									<form method="POST" action="/portaldenoticias/src/php/procUser.php?acao=d&id_autor=<?= $dadosUser['id'] ?>">
 										<button type="submit" class="btn btn-danger">Apagar</button>
 									</form>
 								</div>

@@ -97,7 +97,7 @@ class User
     }
 
     // Deleta o usuário do $id enviado
-    public function deletar($id)
+    public function deleteUser($id)
     {
         $query = "DELETE FROM " . $this->table_name . " WHERE id = ?";
 

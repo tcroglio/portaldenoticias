@@ -136,6 +136,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['acao'])) {
 
 			header('Location: /portaldenoticias/public/gerenciador.php');
 		}
+		
 	} else if ($acao == 'd') {
 		echo "AÇÃO: DELETE <br>";
 

@@ -30,12 +30,11 @@ $noticia = new Noticia($db->getConnection());
 </head>
 
 <body>
-
 	<?php include "../src/inc/index_header.php"; ?>
 
 	<main class="container p-5">
 		<h1>Bem vindo ao seu portal de notícias!</h1>
-		<h4>Veja as noticias mais recentes.</h4>
+		<h4 class="mb-5">Veja as noticias mais recentes.</h4>
 
 		<div class="row">
 			<?php
